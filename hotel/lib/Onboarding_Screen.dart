@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'Home.dart';
+
 class Onboarding_Screen extends StatefulWidget {
   const Onboarding_Screen({super.key});
 
@@ -68,8 +70,13 @@ class _Onboarding_ScreenState extends State<Onboarding_Screen> {
                 children: [
                   Positioned(
                     bottom:400,
-                    left: 16,
-                    child: Image.asset("assets/Image/slider2.png"),
+                    // left: 50,
+                    child: Image.asset(
+                      "assets/Image/The_Aston_Vill_Hotel.png",
+                      width: MediaQuery.of(context).size.width,
+                      height: 352,
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
                   Positioned(
                     bottom: 242,
@@ -149,7 +156,12 @@ class _Onboarding_ScreenState extends State<Onboarding_Screen> {
               ),
             ),
             ElevatedButton(
-              onPressed: () {  },
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) {
+                    return Home();
+                  }), (route) => false);
+                },
               child: Text(
                 "Let’s Go",
                 style: TextStyle(
