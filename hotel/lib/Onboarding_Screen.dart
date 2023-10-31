@@ -63,21 +63,63 @@ class _Onboarding_ScreenState extends State<Onboarding_Screen> {
               ),
             ),
             Container(
-              color: Colors.amber,
-              child: Center(
-                child: Text(
-                  "Page 2",
-                  style: TextStyle(fontSize: 30),
-                ),
+              color: Colors.white,
+              child: Stack(
+                children: [
+                  Positioned(
+                    bottom:400,
+                    left: 16,
+                    child: Image.asset("assets/Image/slider2.png"),
+                  ),
+                  Positioned(
+                    bottom: 242,
+                    left: 37,
+                    right: 40,
+                    child: Text(
+                      "Let’s Find Your Sweet\n & Dream Place",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 28,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),),
+                  Positioned(
+                    bottom: 200,
+                    left: 37,
+                    right: 40,
+                    child: Text(
+                      "Get the opportunity to stay that you dream\n of at an affordable price",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: Color(0xff787878),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
-              color: Colors.deepPurple,
-              child: Center(
-                child: Text(
-                  "Page 3",
-                  style: TextStyle(fontSize: 30),
-                ),
+              padding: EdgeInsets.only(top: 320),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Text(
+                    "Let’s Find Your Sweet\n & Dream Place",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 32,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Image.network(
+                      'https://t3.ftcdn.net/jpg/02/77/05/92/360_F_277059284_8Xb04OKskch27gEcxkwVqSfdGkhiIV4G.jpg',
+                      height: 150,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fitWidth,
+                  ),
+                ],
               ),
             ),
           ],
