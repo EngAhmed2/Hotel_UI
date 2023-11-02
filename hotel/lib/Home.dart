@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final List<Nearby_Hotel> nearby = [
     Nearby_Hotel(
         name: "The Aston Vill Hotel",
@@ -38,6 +43,8 @@ class Home extends StatelessWidget {
     ),
   ];
 
+  int current_Index = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,6 +58,13 @@ class Home extends StatelessWidget {
             ],
           enableFeedback: true,
           type: BottomNavigationBarType.fixed,
+          currentIndex: current_Index,
+          onTap: (int index){
+            setState(() {
+              current_Index = index;
+            });
+          },
+          showUnselectedLabels: false,
         ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 24),
