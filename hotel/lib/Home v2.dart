@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel/Detail.dart';
 
 class Home_V2 extends StatefulWidget {
   Home_V2({super.key});
@@ -245,96 +246,104 @@ class _Home_V2State extends State<Home_V2> {
                   scrollDirection: Axis.horizontal,
                   itemCount: nearby.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: 308,
-                      margin: EdgeInsets.only(right: 16),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color(0x1212120F),
-                                offset: Offset(4, 4),
-                                blurRadius: 5),
-                          ]),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            nearby[index].image,
-                            width: 257,
-                            height: 209,
-                            // fit: BoxFit.fill,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(12),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                //name of Hotel and rate//
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      nearby[index].name,
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xff101010),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 35,
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Text("${nearby[index].rate}")
-                                  ],
-                                ),
-
-                                const SizedBox(height: 8),
-
-                                //address of Hotel//
-                                Text(
-                                  nearby[index].location,
-                                  style: TextStyle(
-                                    color: Color(0xff878787),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-
-                                SizedBox(height: 8),
-
-                                //price and period//
-                                Row(
-                                  children: [
-                                    Text(
-                                      "\$${nearby[index].price}",
-                                      style: TextStyle(
-                                        color: Color(0xff4C4DDC),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                    Text(
-                                      "/${nearby[index].period}",
-                                      style: TextStyle(
-                                        color: Color(0xff878787),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (BuildContext context)=> Detail()),);
+                        });
+                      },
+                      child: Container(
+                        height: 308,
+                        margin: EdgeInsets.only(right: 16),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Color(0x1212120F),
+                                  offset: Offset(4, 4),
+                                  blurRadius: 5),
+                            ]),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              nearby[index].image,
+                              width: 257,
+                              height: 209,
+                              // fit: BoxFit.fill,
                             ),
-                          )
-                        ],
+                            Container(
+                              padding: EdgeInsets.all(12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  //name of Hotel and rate//
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                        nearby[index].name,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color(0xff101010),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 35,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text("${nearby[index].rate}")
+                                    ],
+                                  ),
+
+                                  const SizedBox(height: 8),
+
+                                  //address of Hotel//
+                                  Text(
+                                    nearby[index].location,
+                                    style: TextStyle(
+                                      color: Color(0xff878787),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+
+                                  SizedBox(height: 8),
+
+                                  //price and period//
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "\$${nearby[index].price}",
+                                        style: TextStyle(
+                                          color: Color(0xff4C4DDC),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      Text(
+                                        "/${nearby[index].period}",
+                                        style: TextStyle(
+                                          color: Color(0xff878787),
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -378,86 +387,94 @@ class _Home_V2State extends State<Home_V2> {
                           offset: Offset(4, 4),
                           blurRadius: 5),
                     ]),
-                child: Row(
-                  children: [
-                    Image.asset("assets/Image/Asteria_hotel_84.png"),
-                    Container(
-                      padding: EdgeInsets.only(top: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(width: 16),
-                              Text(
-                                "Asteria hotel   ",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xff101010),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context)=> Detail()), );
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset("assets/Image/Asteria_hotel_84.png"),
+                      Container(
+                        padding: EdgeInsets.only(top: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(width: 16),
+                                Text(
+                                  "Asteria hotel   ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: Color(0xff101010),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 16),
-                              Text(
-                                "\$165.3",
-                                style: TextStyle(
-                                  color: Color(0xff4C4DDC),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
+                                SizedBox(width: 16),
+                                Text(
+                                  "\$165.3",
+                                  style: TextStyle(
+                                    color: Color(0xff4C4DDC),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "/night",
+                                Text(
+                                  "/night",
+                                  style: TextStyle(
+                                    color: Color(0xff878787),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Container(
+                              padding: EdgeInsets.only(left: 16, top: 8),
+                              child: Text(
+                                "Wilora NT 0872, Australia",
                                 style: TextStyle(
-                                  color: Color(0xff878787),
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w500,
+                                  color: Color(0xff878787),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            padding: EdgeInsets.only(left: 16, top: 8),
-                            child: Text(
-                              "Wilora NT 0872, Australia",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff878787),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            children: [
-                              const SizedBox(width: 16),
-                              Container(
-                                width: 5 * 20,
-                                height: 20,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: 5,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                      size: 20,
-                                    );
-                                  },
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                const SizedBox(width: 16),
+                                Container(
+                                  width: 5 * 20,
+                                  height: 20,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: 5,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                        size: 20,
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 4),
-                              Text("5.0")
-                            ],
-                          ),
-                        ],
+                                const SizedBox(width: 4),
+                                Text("5.0")
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
