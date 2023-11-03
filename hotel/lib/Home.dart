@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel/Schedule.dart';
 
 import 'Detail.dart';
 
@@ -10,6 +11,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   final List<Nearby_Hotel> nearby = [
     Nearby_Hotel(
         name: "The Aston Vill Hotel",
@@ -46,6 +48,17 @@ class _HomeState extends State<Home> {
   ];
 
   int current_Index = 0;
+  List<Widget> Screens = [
+    Home(),
+    Schedule(),
+  ];
+
+  Future<dynamic> Screen(int index) async {
+    if(index >=2)
+      return;
+    return Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (BuildContext context)=> Screens[index]),);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +77,7 @@ class _HomeState extends State<Home> {
           onTap: (int index){
             setState(() {
               current_Index = index;
+              Screen(index);
             });
           },
           showUnselectedLabels: false,
@@ -303,30 +317,32 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              const SizedBox(height: 1),
+
+              //Card//
               Container(
                 height: 108,
-                decoration: BoxDecoration(color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [BoxShadow(
-                        color: Color(0x1212120F),
-                        offset: Offset(4, 4),
-                        blurRadius: 5
-                    ),
-                    ]
-                ),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0x1212120F),
+                          offset: Offset(4, 4),
+                          blurRadius: 5),
+                    ]),
                 child: InkWell(
                   onTap: () {
                     setState(() {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context)=> Detail()),);
+                          builder: (BuildContext context)=> Detail()), );
                     });
                   },
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Image.asset("assets/Image/Asteria_hotel_84.png"),
                       Container(
-                        padding: EdgeInsets.only(top: 16 ),
+                        padding: EdgeInsets.only(top: 16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -378,32 +394,32 @@ class _HomeState extends State<Home> {
                               children: [
                                 const SizedBox(width: 16),
                                 Container(
-                                  width: 5*20,
+                                  width: 5 * 20,
                                   height: 20,
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     physics: NeverScrollableScrollPhysics(),
                                     itemCount: 5,
-                                    itemBuilder: (BuildContext context, int index) {
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
                                       return Icon(
                                         Icons.star,
                                         color: Colors.amber,
                                         size: 20,
-                                      );},
+                                      );
+                                    },
                                   ),
                                 ),
                                 const SizedBox(width: 4),
                                 Text("5.0")
                               ],
                             ),
-
                           ],
                         ),
                       ),
                     ],
                   ),
                 ),
-
               ),
             ],
           ),

@@ -24,7 +24,7 @@ class _Onboarding_ScreenState extends State<Onboarding_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        //padding: EdgeInsets.only(bottom: 22),
+
         child: PageView(
           controller: controller,
           children: [
@@ -120,8 +120,8 @@ class _Onboarding_ScreenState extends State<Onboarding_Screen> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  Image.network(
-                      'https://t3.ftcdn.net/jpg/02/77/05/92/360_F_277059284_8Xb04OKskch27gEcxkwVqSfdGkhiIV4G.jpg',
+                  Image.asset(
+                      'assets/Image/arrow.png',
                       height: 150,
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.fitWidth,

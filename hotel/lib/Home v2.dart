@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hotel/Detail.dart';
 
+import 'Home.dart';
+import 'Schedule.dart';
+
 class Home_V2 extends StatefulWidget {
   Home_V2({super.key});
 
@@ -9,6 +12,7 @@ class Home_V2 extends StatefulWidget {
 }
 
 class _Home_V2State extends State<Home_V2> {
+
   final List<Nearby_Hotel> nearby = [
     Nearby_Hotel(
         name: "The Aston Vill Hotel",
@@ -65,6 +69,18 @@ class _Home_V2State extends State<Home_V2> {
     },
   ];
 
+  List<Widget> Screens = [
+    Home_V2(),
+    Schedule(),
+  ];
+
+  Future<dynamic> Screen(int index) async {
+    if(index >=2)
+      return;
+    return Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (BuildContext context)=> Screens[index]),);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -94,11 +110,13 @@ class _Home_V2State extends State<Home_V2> {
           onTap: (int index) {
             setState(() {
               current_Index = index;
+              Screen(index);
             });
           },
           showUnselectedLabels: false,
         ),
         body: Container(
+          height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
@@ -170,6 +188,10 @@ class _Home_V2State extends State<Home_V2> {
                       onTap: () {
                         setState(() {
                           tab_index = index;
+                          index == 0
+                              ? Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (BuildContext context)=> Home()),)
+                              : index = index;
                         });
                       },
                       child: AnimatedContainer(
@@ -375,12 +397,12 @@ class _Home_V2State extends State<Home_V2> {
                   ),
                 ],
               ),
-              const SizedBox(height: 1),
+
               Container(
                 height: 108,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
                           color: Color(0x1212120F),
@@ -395,6 +417,7 @@ class _Home_V2State extends State<Home_V2> {
                     });
                   },
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Image.asset("assets/Image/Asteria_hotel_84.png"),
                       Container(
