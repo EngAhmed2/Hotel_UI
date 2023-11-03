@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hotel/Home%20v2.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import 'Home.dart';
 
 class Onboarding_Screen extends StatefulWidget {
@@ -159,7 +159,7 @@ class _Onboarding_ScreenState extends State<Onboarding_Screen> {
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) {
-                    return Home();
+                    return Home_V2();
                   }), (route) => false);
                 },
               child: Text(

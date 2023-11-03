@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  Home({super.key});
+class Home_V2 extends StatefulWidget {
+  Home_V2({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Home_V2> createState() => _Home_V2State();
 }
 
-class _HomeState extends State<Home> {
+class _Home_V2State extends State<Home_V2> {
   final List<Nearby_Hotel> nearby = [
     Nearby_Hotel(
         name: "The Aston Vill Hotel",
@@ -15,35 +15,54 @@ class _HomeState extends State<Home> {
         image: "assets/Image/Aston_Hotel.png",
         period: "night",
         price: 200.7,
-        rate: 5.0
-    ),
+        rate: 5.0),
     Nearby_Hotel(
         name: "Golden Pelece",
         location: "Wilora NT 0872, Australia",
         image: "assets/Image/Golden_Pelece.png",
         period: "morning",
         price: 175.3,
-        rate: 4.5
-    ),
+        rate: 4.5),
     Nearby_Hotel(
         name: "The Aston Vill Hotel",
         location: "Alice Springs NT 0870, Australia",
         image: "assets/Image/Aston_Hotel.png",
         period: "night",
         price: 200.7,
-        rate: 5.0
-    ),
+        rate: 5.0),
     Nearby_Hotel(
         name: "Golden Pelece",
         location: "Wilora NT 0872, Australia",
         image: "assets/Image/Golden_Pelece.png",
         period: "morning",
         price: 175.3,
-        rate: 4.5
-    ),
+        rate: 4.5),
   ];
 
   int current_Index = 0;
+  int tab_index = 0;
+  List tab_Info = [
+    {
+      'name': 'Hotel',
+      'icon': {
+        'gray': 'assets/Icon/Hotel_Gray.png',
+        'white': 'assets/Icon/Hotel_White.png'
+      }
+    },
+    {
+      'name': 'Market',
+      'icon': {
+        'gray': 'assets/Icon/store_Gray.png',
+        'white': 'assets/Icon/store_White.png'
+      }
+    },
+    {
+      'name': 'Coffee',
+      'icon': {
+        'gray': 'assets/Icon/coffee_Gray.png',
+        'white': 'assets/Icon/coffee_White.png'}
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +70,27 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(icon:Icon(Icons.home_filled),label: "Home",),
-            BottomNavigationBarItem(icon:Icon(Icons.calendar_month_rounded),label: "Schedule",),
-            BottomNavigationBarItem(icon:Icon(Icons.bookmark_outlined),label: "BookMark",),
-            BottomNavigationBarItem(icon:Icon(Icons.person),label: "Profile",),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_filled),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_month_rounded),
+              label: "Schedule",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.bookmark_outlined),
+              label: "BookMark",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Profile",
+            ),
           ],
           enableFeedback: true,
           type: BottomNavigationBarType.fixed,
           currentIndex: current_Index,
-          onTap: (int index){
+          onTap: (int index) {
             setState(() {
               current_Index = index;
             });
@@ -70,7 +101,7 @@ class _HomeState extends State<Home> {
           padding: EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              const SizedBox( height: 16 ),
+              const SizedBox(height: 16),
               //current location & notification icon//
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,19 +158,55 @@ class _HomeState extends State<Home> {
               const SizedBox(
                 height: 16,
               ),
-              // search icon & search bar & setting icon//
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Search Hotel",
-                  prefixIcon: Icon(
-                    Icons.search_rounded,
-                    size: 30,
-                  ),
-                  suffixIcon: Image.asset("assets/Image/setting_Icon.png"),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xffD6D6D6)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+              SizedBox(
+                height: 38,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: tab_Info.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          tab_index = index;
+                        });
+                      },
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        height: 37,
+                        width: 95,
+                        margin: EdgeInsets.only(right: 12),
+                        decoration: BoxDecoration(
+                          color: tab_index == index
+                              ? Color(0xff4C4DDC)
+                              : Color(0xffF5F5F5),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              tab_index == index
+                                  ? tab_Info[index]['icon']['white']
+                                  : tab_Info[index]['icon']['gray'],
+                              height: 20,
+                              width: 20,
+                            ),
+                            Text(
+                              tab_Info[index]['name'],
+                              style: TextStyle(
+                                color: tab_index == index
+                                    ? Color(0xffFFFFFF)
+                                    : Color(0xff878787),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               const SizedBox(
@@ -181,15 +248,15 @@ class _HomeState extends State<Home> {
                     return Container(
                       height: 308,
                       margin: EdgeInsets.only(right: 16),
-                      decoration: BoxDecoration(color: Colors.white,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
-                          boxShadow: [BoxShadow(
-                              color: Color(0x1212120F),
-                              offset: Offset(4, 4),
-                              blurRadius: 5
-                          ),
-                          ]
-                      ),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0x1212120F),
+                                offset: Offset(4, 4),
+                                blurRadius: 5),
+                          ]),
                       child: Column(
                         children: [
                           Image.asset(
@@ -206,7 +273,8 @@ class _HomeState extends State<Home> {
                               children: [
                                 //name of Hotel and rate//
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
                                       nearby[index].name,
@@ -216,8 +284,13 @@ class _HomeState extends State<Home> {
                                         color: Color(0xff101010),
                                       ),
                                     ),
-                                    const SizedBox(width: 35,),
-                                    Icon(Icons.star,color: Colors.amber,),
+                                    const SizedBox(
+                                      width: 35,
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
                                     const SizedBox(width: 8),
                                     Text("${nearby[index].rate}")
                                   ],
@@ -296,20 +369,20 @@ class _HomeState extends State<Home> {
               const SizedBox(height: 1),
               Container(
                 height: 108,
-                decoration: BoxDecoration(color: Colors.white,
+                decoration: BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    boxShadow: [BoxShadow(
-                        color: Color(0x1212120F),
-                        offset: Offset(4, 4),
-                        blurRadius: 5
-                    ),
-                    ]
-                ),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0x1212120F),
+                          offset: Offset(4, 4),
+                          blurRadius: 5),
+                    ]),
                 child: Row(
                   children: [
                     Image.asset("assets/Image/Asteria_hotel_84.png"),
                     Container(
-                      padding: EdgeInsets.only(top: 16 ),
+                      padding: EdgeInsets.only(top: 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -361,31 +434,31 @@ class _HomeState extends State<Home> {
                             children: [
                               const SizedBox(width: 16),
                               Container(
-                                width: 5*20,
+                                width: 5 * 20,
                                 height: 20,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   physics: NeverScrollableScrollPhysics(),
                                   itemCount: 5,
-                                  itemBuilder: (BuildContext context, int index) {
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
                                     return Icon(
                                       Icons.star,
                                       color: Colors.amber,
                                       size: 20,
-                                    );},
+                                    );
+                                  },
                                 ),
                               ),
                               const SizedBox(width: 4),
                               Text("5.0")
                             ],
                           ),
-
                         ],
                       ),
                     ),
                   ],
                 ),
-
               ),
             ],
           ),
@@ -405,9 +478,9 @@ class Nearby_Hotel {
 
   Nearby_Hotel(
       {required this.name,
-        required this.location,
-        required this.image,
-        required this.period,
-        required this.price,
-        required this.rate});
+      required this.location,
+      required this.image,
+      required this.period,
+      required this.price,
+      required this.rate});
 }
